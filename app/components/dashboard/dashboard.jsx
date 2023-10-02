@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 import Leaverequest from "../leaverequestform/Requestform.jsx";
 import { redirect } from "next/navigation";
-import Leavestatus from "../leavestatus/leavestatus";
+import Leavestatus from "../leavestatus/leavestatus.jsx";
 import { useSession } from "next-auth/react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
@@ -51,7 +51,7 @@ export default function Dashboard() {
               <i className="fa-solid fa-user"></i>
             </div  >
             <div className="flex-box">
-              <span className="reg">{regnum}(Student)</span>
+              <span className="reg">{regnum}({role})</span>
               <button onClick={e => logout(e)} className="btn btn-primary">
           Logout
         </button>

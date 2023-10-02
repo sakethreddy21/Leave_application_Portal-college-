@@ -3,10 +3,7 @@ import React, {useState,useEffect, Fragment} from "react";
 import './Requestform.css';
 import { useSession } from "next-auth/react";
 import { toast } from "react-hot-toast"
-import { FcGoogle } from 'react-icons/fc';
-import { redirect } from "next/navigation";
-import { BsFillPersonFill } from 'react-icons/bs';
-import { AiOutlineMail, AiFillLock } from 'react-icons/ai';
+
 export default  function form() {
   const inputitems = [
     {
@@ -25,7 +22,7 @@ export default  function form() {
     },
     {
       id: '3',
-      name: 'leavetype',
+      name: 'leaveType',
        // Replace YourIconComponent with the actual icon component
       type: 'text',
       placeholder: 'Enter Leave Type',
@@ -46,14 +43,14 @@ export default  function form() {
     },
     {
       id: '6',
-      name: 'fromdate',
+      name: 'fromDate',
        // Replace YourIconComponent with the actual icon component
       type: 'date',
       placeholder: 'Select From Date',
     },
     {
       id: '7',
-      name: 'todate',
+      name: 'toDate',
       // Replace YourIconComponent with the actual icon component
       type: 'date',
       placeholder: 'Select To Date',
@@ -93,24 +90,25 @@ export default  function form() {
   
   const onSubmitform = async e => {
 e.preventDefault()
-if(leaveType==="" || visitingPlace==="" || reason==="" || fromDate==="" || toDate===""){  
-  toast.error("Please fill all the fields");
-  }
+
   try {
-    const res = await fetch("api/requestform/new",{
+    const res = await fetch("api/requestpost/new",{
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({stdname, regnum,stdname, regnum,leaveType,visitingPlace,reason,fromDate,toDate,stdname,regnum,role})
+      body: JSON.stringify(inputValues),
+     
     })
+    toast.success("details strignified")
     if(res.ok){
       toast.success("Request submitted successfully")
     }
     else{
+      console.log(error)
       toast.error("Something went wrong")
     }
     
   } catch (error) {
-    
+    toast.error(error.message)
   }
   }
 
@@ -128,6 +126,7 @@ if(leaveType==="" || visitingPlace==="" || reason==="" || fromDate==="" || toDat
     </p>
     <div>
       <div className="w-60">
+      
         {inputitems.map((item) => (
           <div key={item.name} className="w-60">
             <div className=" mt-4">
@@ -149,11 +148,12 @@ if(leaveType==="" || visitingPlace==="" || reason==="" || fromDate==="" || toDat
             </div>
           </div>
         ))}
+        
       </div>
 
       <button className="font-bold ml-60">forgot password?</button>
       <div className="mt-2">
-        <button   className="bg-pink-500 text-white font-bold text-xl rounded-lg px-40 py-1">
+        <button onClick={onSubmitform}   className="bg-pink-500 text-white font-bold text-xl rounded-lg px-40 py-1">
           Sign up
         </button>
       </div>
