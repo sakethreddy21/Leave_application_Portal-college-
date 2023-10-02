@@ -6,7 +6,7 @@ import bcrypt from 'bcryptjs';
 
 export async function POST(req, res) {
   await connectMongoDB()
-        const { stdname, regnum, leaveType, visitingPlace, reason, fromDate, toDate } =await req.json();
+        const {stdname,regnum,leaveType,visitingPlace,reason,fromDate,toDate } =await req.json();
         if (!stdname || !regnum || !leaveType || !visitingPlace || !reason || !fromDate || !toDate) {
           return NextResponse.json({message: "filll the all details"}, {status:422})
           //res.status(422).json({ error: "filll the all details" });
