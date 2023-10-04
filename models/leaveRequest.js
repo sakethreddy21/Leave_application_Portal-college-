@@ -30,7 +30,20 @@ const studentleaveSchema = new Schema(
       type: String,
       required: true,
     },
-    
+    status:{
+      type: String,
+      default: "pending",
+    },
+    remarks:{
+      type: String,
+      default: " ",
+    },
+    facultyEmail: {
+      type: String,
+    },
+    hodEmail:{
+      type: String,
+    },
   },
   { timestamps: true }
 );

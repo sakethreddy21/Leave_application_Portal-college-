@@ -4,7 +4,17 @@ import './Requestform.css';
 import { useSession } from "next-auth/react";
 import { toast } from "react-hot-toast"
 
+
 export default  function form() {
+
+ const { data: session } = useSession();
+  
+  if (!session) redirect("/");
+
+  const regnum = session?.user?._doc.regnum;
+  const role = session?.user?._doc.role;
+  const status='pending';
+  console.log(regnum);
   const inputitems = [
     {
       id: '1',
@@ -12,13 +22,16 @@ export default  function form() {
        // Replace YourIconComponent with the actual icon component
       type: 'text',
       placeholder: 'Enter Student Name',
+     
     },
     {
       id: '2',
       name: 'regnum',
+      value: regnum,
        // Replace YourIconComponent with the actual icon component
       type: 'text',
-      placeholder: 'Enter Registration Number',
+      placeholder: regnum,
+      readonly: true,
     },
     {
       id: '3',
@@ -55,18 +68,44 @@ export default  function form() {
       type: 'date',
       placeholder: 'Select To Date',
     },
+    {
+      id: '8',
+      name: 'facultyEmail',
+       // Replace YourIconComponent with the actual icon component
+      type: 'text',
+      placeholder: 'Enter Faculty Email',
+     
+    },
+    {
+      id: '9',
+      name: 'hodEmail',
+       // Replace YourIconComponent with the actual icon component
+      type: 'text',
+      placeholder: 'Enter ]HOD Email',
+     
+    },
   ];
   const [inputValues, setInputValues] = useState({});
 
   
   const handleInputChange = (e, name) => {
     const { value } = e.target;
+    
     setInputValues((prevValues) => ({
       ...prevValues,
+      regnum: regnum || '',
+      status: status || '',
       [name]: value,
     }));
     console.log(inputValues);
   };
+  useEffect(() => {
+    // After the session is available, set the regnum value in inputValues
+    setInputValues((prevValues) => ({
+      ...prevValues,
+      regnum: regnum || '', // Initialize with regnum or an empty string
+    }));
+  }, [regnum]);
 
 
 
@@ -76,16 +115,7 @@ export default  function form() {
 
 
 
-  const { data: session } = useSession();
-
-  const stdname = session?.user?._doc.name;
-  const regnum= session?.user?._doc.regnum;
-  const role=session?.user?._doc.role;
-  const [leaveType, setLeavetype]= useState("")
-  const[visitingPlace, setVistingplace]= useState("");
-  const [reason, setReason] = useState("");
-  const [fromDate, setFromdate] = useState("");
-  const [toDate, setTodate] = useState("");
+ 
 
   
   const onSubmitform = async e => {
@@ -99,6 +129,7 @@ e.preventDefault()
      
     })
     toast.success("details strignified")
+    console.log(inputValues)  
     if(res.ok){
       toast.success("Request submitted successfully")
     }
@@ -141,8 +172,10 @@ e.preventDefault()
                 type={item.type}
                 placeholder={item.placeholder}
                // Add onchange event listener
+               if
                onChange={(e) => handleInputChange(e, item.name)}
         value={inputValues[item.name] || ''}
+        readOnly={item.readonly}
                 className="h-10 border-2 border-pink-500 rounded-lg pl-10 text-pink-500 placeholder-pink-500 focus:border-transparent  focus:outline-none w-96"
               />
             </div>

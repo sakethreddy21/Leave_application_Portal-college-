@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react";
+
 import { connectMongoDB } from "@/lib/mongodb";
 import data from "@/models/leaveRequest";
 import { NextResponse } from "next/server";
@@ -6,10 +6,21 @@ export async function POST(req, res) {
 
 try {
   await connectMongoDB();
-  const  {regnum} = await req.json();  
-  const leavedeatils = await data.find({regnum});
+  const { regnum, facultyEmail } = await req.json();
+
+  let query = {};
+  
+  if (regnum) {
+    query.regnum = regnum;
+  }
+  
+  if (facultyEmail) {
+    query.facultyEmail = facultyEmail;
+  }
+  
+  const leavedeatils = await data.find(query);
   console.log(leavedeatils);
-   return NextResponse.json(leavedeatils,{status:401})
+   return NextResponse.json(leavedeatils,{status:200})
 
   
 }
