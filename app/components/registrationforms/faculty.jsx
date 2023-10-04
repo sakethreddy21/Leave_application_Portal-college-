@@ -16,7 +16,7 @@ const [password, setPassword] = useState("");
 const role= "faculty"
 const [error, setError] = useState("");
  const router = useRouter();
-const handleSubmit = async(e) => {
+const handleSubmit = (e) => {
     e.preventDefault();
 
       if (!regnum || !email || !password) {
@@ -25,7 +25,7 @@ const handleSubmit = async(e) => {
     }
     
     try {
-        const res = await fetch("api/register", {
+        const res =  fetch("api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

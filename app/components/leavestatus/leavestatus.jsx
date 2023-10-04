@@ -13,9 +13,10 @@ export default function LeaveStatus() {
   
   const { data: session } = useSession();
   if (!session) redirect("/");
-  const regnum = "qwert"
-  const role = session?.user?._doc.role;
 
+  const regnum = session?.user?._doc.regnum;
+  const role = session?.user?._doc.role;
+  console.log(regnum);
 
 
 
@@ -29,7 +30,7 @@ export default function LeaveStatus() {
           body: JSON.stringify({regnum}),
         });
         const leavearray = await res.json();
-        console.log(res);
+        console.log(leavearray);
         setLeaves(leavearray);
       } catch (err) {
         console.error(err.message);
@@ -48,21 +49,10 @@ export default function LeaveStatus() {
 
       <div className="tabl table-responsive">
 
-          <div className="row">
-
-           
-            <div className="col search">
-              <input type="search " placeholder="  Search..."/>
-              <span><i className="fa-solid fa-magnifying-glass"> </i></span>
-            </div>
-
-          </div>
-
-          <table className="table table-striped table-hover">
-            <thead className="table-info table align-middle">
-              <tr>
-                
-                <th scope="col">leave_id</th>
+      <table class="styled-table">
+    <thead>
+        <tr>
+        <th scope="col">leave_id</th>
                 <th scope="col">Place of visit</th>
                 <th scope="col">Reason</th>
                 <th scope="col">Leave Type</th>
@@ -72,32 +62,31 @@ export default function LeaveStatus() {
                 <th scope="col">Remarks</th>
                 <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
-             
-              </tr>
-            </thead>
-            <tbody>
-            {
+        </tr>
+    </thead>
+    <tbody>
+    {
           leaves.map(data => (
             <tr key={data.leave_id}>
-              <td>{data.leave_id}</td>
-              <td>{data.visitingplace}</td>
+              <td>{data._id}</td>
+              <td>{data.visitingPlace}</td>
               <td>{data.reason}</td>
-              <td>{data.leavetype}</td>
-              <td>{data.fromdate}</td>
-              <td>{data.todate}</td>
+              <td>{data.leaveType}</td>
+              <td>{data.fromDate}</td>
+              <td>{data.toDate}</td>
               <td>{data.status}</td>
               <td>{}</td>
               
               <td>Edit</td>
-              <td><button type='button' className="btn btn-danger">Delete</button></td>
+              <td><button type='button' className="btn btn-danger" onClick={()=>deleteleave(data.leave_id)}>Delete</button></td>
 
 
             </tr>
           ))
         }
-              
-            </tbody>
-          </table>
+        
+    </tbody>
+</table>
         </div>
         
     </div>

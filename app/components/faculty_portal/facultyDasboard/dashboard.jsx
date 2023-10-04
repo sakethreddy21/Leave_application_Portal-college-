@@ -1,16 +1,16 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 
-import Leaverequest from "../leaverequestform/Requestform.jsx";
+import Leaverequests from "../leaveRequests/leaveRequest";
 import { redirect } from "next/navigation";
-import Leavestatus from "../leavestatus/leavestatus.jsx";
+
 import { useSession } from "next-auth/react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import ".//Navbar.css";
+import "./Navbar.css";
 
 
 export default function Dashboard() {
@@ -75,11 +75,11 @@ export default function Dashboard() {
         <Box sx={{borderBottom:1, borderColor:'divider'}}>
         <TabList aria-label='Tabs example' onChange={handleChange}>
         <Tab label='Item One' value='1'/>
-        <Tab label='Item Two' value='2'/>
+       
         </TabList>
         </Box>
-        <TabPanel value="1"><Leaverequest/></TabPanel>
-        <TabPanel value="2"><Leavestatus/></TabPanel>
+        <TabPanel value="1"><Leaverequests/></TabPanel>
+        
         </TabContext>
     </Box>
 
