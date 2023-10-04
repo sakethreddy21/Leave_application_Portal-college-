@@ -23,7 +23,7 @@ export default function LeaveStatus() {
 
   const regnum = session?.user?._doc.regnum;
   const role = session?.user?._doc.role;
-  const facultyEmail = session?.user?._doc.email;
+  const hodEmail = session?.user?._doc.email;
   
 
 
@@ -32,10 +32,10 @@ export default function LeaveStatus() {
   useEffect(() => {
     const getLeave = async () => {
       try {
-        const res = await fetch('api/requestpost', {
+        const res = await fetch('api/requestpost/hodrequest', {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ facultyEmail }),
+          body: JSON.stringify({ hodEmail }),
         });
         const leavearray = await res.json();
         console.log(leavearray);
@@ -51,7 +51,7 @@ export default function LeaveStatus() {
 
   const updateStatus = async (_id) => {
   console.log(_id)
-  const status = "Approved by faculty"  
+  const status = "Approved by HOD"  
     
       try {
        

@@ -1,0 +1,105 @@
+.navbar {
+  background-color: #007bff;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.logo {
+  width: 100px; /* Adjust the width as needed */
+  height: auto;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-image {
+  width: 30px; /* Adjust the image size */
+  height: 30px;
+  border-radius: 50%; /* Makes the image round */
+}
+
+.nav-dropdown {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  display: none;
+}
+
+.nav-item:hover .nav-dropdown {
+  display: block;
+}
+
+.nav-item {
+  position: relative;
+  cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.nav-item:hover .nav-dropdown {
+  display: block;
+}
+
+.nav-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 1;
+}
+
+.dropdown-toggle:hover {
+  cursor: pointer;
+}
+
+.nav-dropdown li {
+  padding: 8px 16px;
+}
+
+.nav-dropdown li:hover {
+  background-color: #ccc;
+}
+
+.nav-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 1;
+  color: black;
+  font-size: 16px;
+  opacity: 1;
+  overflow: visible;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+}

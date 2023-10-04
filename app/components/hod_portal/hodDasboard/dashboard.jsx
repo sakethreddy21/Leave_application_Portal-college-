@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 
-import Leaverequests from "../leaveRequests/leaveRequest";
+import Leaverequests from "../hodleaveRequests/leaveRequest";
 import { redirect } from "next/navigation";
 
 import { useSession } from "next-auth/react";
@@ -43,7 +43,7 @@ export default function Dashboard() {
         </div>
         <img src="" className="logo md-1" alt="SRMIST" />
 
-        <h2>Welcome to application Faculty</h2>
+        <h2>Welcome to application HOD</h2>
         
         <ul className="navbar-nav ms-auto">
           <li className="nav-link">
@@ -79,6 +79,7 @@ export default function Dashboard() {
         </TabList>
         </Box>
         <TabPanel value="1"><Leaverequests/></TabPanel>
+       
         
         </TabContext>
     </Box>

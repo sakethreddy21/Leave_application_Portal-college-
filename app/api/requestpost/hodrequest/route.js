@@ -6,20 +6,18 @@ export async function POST(req, res) {
 
 try {
   await connectMongoDB();
-  const { regnum, facultyEmail } = await req.json();
-
+  const {hodEmail } = await req.json();
+const status="Approved by faculty"
   let query = {};
   
-  if (regnum) {
-    query.regnum = regnum;
-  }
   
-  if (facultyEmail) {
-    query.facultyEmail = facultyEmail;
+  if (hodEmail) {
+    query.hodEmail= hodEmail;
   }
  
   
-  const leavedeatils = await data.find(query);
+  const _id = await data.find(query, status);
+  const leavedeatils= await data.find({_id:_id});
   console.log(leavedeatils);
    return NextResponse.json(leavedeatils,{status:200})
 
